@@ -4,6 +4,8 @@ package com.github.iceant.spring.jdbc.dao.generator.detail.generators.models;
 import com.github.iceant.spring.jdbc.dao.generator.detail.meta.ColumnMeta;
 import com.github.iceant.spring.jdbc.dao.generator.detail.meta.TableMeta;
 
+import java.lang.reflect.Field;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -106,6 +108,22 @@ public class RepositoryBeanModel {
         return stringBuilder.toString();
     }
 
+    public String getTypesCode(int type){
+        for(Field field : Types.class.getDeclaredFields()){
+            field.setAccessible(true);
+            String fieldName = field.getName();
+            try {
+                int value = field.getInt(null);
+                if(type==value){
+                    return "Types."+fieldName;
+                }
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+        throw new RuntimeException("Can not find type for value '"+type+"'");
+    }
+
     public String getInsertPreparedStatementSetter(){
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append("new PreparedStatementSetter(){\n");
@@ -129,7 +147,7 @@ public class RepositoryBeanModel {
             stringBuffer.append("\t\t\t\t")
                     .append("StatementCreatorUtils.setParameterValue(preparedStatement, ")
                     .append(index).append(", ")
-                    .append(tcm.getColumnMeta().getType()).append(", ")
+                    .append(getTypesCode(tcm.getColumnMeta().getType())).append(", ")
                     .append(getTableBeanInstanceName()).append(".").append(tcm.getGetMethodName()).append("()").append(");\n");
             index = index+1;
         }
@@ -212,7 +230,7 @@ public class RepositoryBeanModel {
             stringBuffer.append("\t\t\t\t")
                     .append("StatementCreatorUtils.setParameterValue(preparedStatement, ")
                     .append(index).append(", ")
-                    .append(tcm.getColumnMeta().getType()).append(", ")
+                    .append(getTypesCode(tcm.getColumnMeta().getType())).append(", ")
                     .append(getTableBeanInstanceName()).append(".").append(tcm.getGetMethodName()).append("()").append(");\n");
 
             index = index+1;
@@ -230,7 +248,7 @@ public class RepositoryBeanModel {
                 stringBuffer.append("\t\t\t\t")
                         .append("StatementCreatorUtils.setParameterValue(preparedStatement, ")
                         .append(index).append(", ")
-                        .append(tcm.getColumnMeta().getType()).append(", ")
+                        .append(getTypesCode(tcm.getColumnMeta().getType())).append(", ")
                         .append(getTableBeanInstanceName()).append(".").append(tcm.getGetMethodName()).append("()").append(");\n");
                 index = index+1;
             }
