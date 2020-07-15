@@ -256,6 +256,10 @@ public class RepositoryBeanModel {
         return tableColumnModels;
     }
 
+    public boolean getHasOnlyOnePrimaryKey(){
+        return getPrimaryKeyColumns().size()==1;
+    }
+
     public String getFindByPkMethodParams(){
         StringBuilder param = new StringBuilder();
         if(tableMeta.hasPrimaryKey()){

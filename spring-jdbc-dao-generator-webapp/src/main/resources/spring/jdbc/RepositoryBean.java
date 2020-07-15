@@ -37,29 +37,32 @@ public class {{className}} {
         return jdbcTemplate;
     }
 
-
-    public static final RowMapper<{{tableBeanClassName}}> ROW_MAPPER = new RowMapper<{{tableBeanClassName}}>() {
-        public {{tableBeanClassName}} mapRow(java.sql.ResultSet rs, int i) throws java.sql.SQLException {
-            {{tableBeanClassName}} bean = new {{tableBeanClassName}}();
-            {{#columns}}
-            bean.{{setMethodName}}(rs.{{resultSetGetMethodName}}("{{tableColumnName}}"));
-            {{/columns}}
-            return bean;
-        }
-    };
-
-    public static final ResultSetExtractor<{{tableBeanClassName}}> RESULT_SET_EXTRACTOR = new ResultSetExtractor<{{tableBeanClassName}}>() {
-        public {{tableBeanClassName}} extractData(java.sql.ResultSet rs) throws java.sql.SQLException, DataAccessException {
-            if (rs.next()) {
+    public static final RowMapper<{{tableBeanClassName}}> makeRowMapper(){
+        return new RowMapper<{{tableBeanClassName}}>() {
+            public {{tableBeanClassName}} mapRow(java.sql.ResultSet rs, int i) throws java.sql.SQLException {
                 {{tableBeanClassName}} bean = new {{tableBeanClassName}}();
                 {{#columns}}
                 bean.{{setMethodName}}(rs.{{resultSetGetMethodName}}("{{tableColumnName}}"));
                 {{/columns}}
                 return bean;
-            }/*end if(rs.next())*/
-            return null;
-        }
-    };
+            }
+        };
+    }
+
+    public static final ResultSetExtractor<{{tableBeanClassName}}> makeResultSetExtractor(){
+        return new ResultSetExtractor<{{tableBeanClassName}}>() {
+            public {{tableBeanClassName}} extractData(java.sql.ResultSet rs) throws java.sql.SQLException, DataAccessException {
+                if (rs.next()) {
+                    {{tableBeanClassName}} bean = new {{tableBeanClassName}}();
+                    {{#columns}}
+                    bean.{{setMethodName}}(rs.{{resultSetGetMethodName}}("{{tableColumnName}}"));
+                    {{/columns}}
+                    return bean;
+                }/*end if(rs.next())*/
+                return null;
+            }
+        };
+    }
 
     @CacheEvict(value = "{{tableBeanClassName}}", allEntries = true, beforeInvocation = true)
     public int insert({{tableBeanClassName}} {{tableBeanInstanceName}}) {
@@ -72,6 +75,15 @@ public class {{className}} {
         return jdbcTemplate.update("{{{updateSql}}}", {{&updatePreparedStatementSetter}});
     }
 
+    {{#hasOnlyOnePrimaryKey}}
+    static final String FIND_BY_PK_SQL = SELECT_SQL + {{#primaryKeyColumns}}" WHERE {{tableColumnName}}=?"{{/primaryKeyColumns}};
+    @Cacheable(value = "{{tableBeanClassName}}")
+    public {{tableBeanClassName}} findByPk({{findByPkMethodParams}}){
+        return findOneBySql(FIND_BY_PK_SQL, {{getFindByPkQueryParams}});
+    }
+    {{/hasOnlyOnePrimaryKey}}
+
+    {{^hasOnlyOnePrimaryKey}}
     @Cacheable(value = "{{tableBeanClassName}}")
     public {{tableBeanClassName}} findByPk({{findByPkMethodParams}}){
         StringBuilder sql = new StringBuilder();
@@ -79,9 +91,9 @@ public class {{className}} {
         {{#primaryKeyColumns}}
         sql.append(" AND {{tableColumnName}}=?");
         {{/primaryKeyColumns}}
-
         return findOneBySql(sql.toString(), {{getFindByPkQueryParams}});
     }
+    {{/hasOnlyOnePrimaryKey}}
     {{/hasPrimaryKey}}
 
     @CacheEvict(value = "{{tableBeanClassName}}", allEntries = true, beforeInvocation = true)
@@ -91,12 +103,12 @@ public class {{className}} {
 
     @Cacheable(value = "{{tableBeanClassName}}")
     public List<{{tableBeanClassName}}> findBySql(String sql, Object... params) {
-        return jdbcTemplate.query(sql, ROW_MAPPER, params);
+        return jdbcTemplate.query(sql, makeRowMapper(), params);
     }
 
     @Cacheable(value = "{{tableBeanClassName}}")
     public {{tableBeanClassName}} findOneBySql(String sql, Object... params) {
-        return jdbcTemplate.query(sql, params, RESULT_SET_EXTRACTOR);
+        return jdbcTemplate.query(sql, params, makeResultSetExtractor());
     }
 
     @CacheEvict(value = "{{tableBeanClassName}}", allEntries = true, beforeInvocation = true)
