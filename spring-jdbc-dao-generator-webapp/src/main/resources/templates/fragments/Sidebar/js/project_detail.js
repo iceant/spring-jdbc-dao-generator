@@ -95,6 +95,17 @@
 
                     $service.generateCode(param, function(data){
                         console.log(data);
+                        let html = Mustache.render("{{#result}}<li><a href='{{.}}'>{{.}}</a>{{/result}}", data.results);
+                        $.confirm({
+                            columnClass:'xlarge',
+                            title:'Result',
+                            content:html,
+                            buttons:{
+                                close:{
+                                    text:'@rocker.$.msg("text.close")'
+                                }
+                            }
+                        });
                     });
                 });
             }
