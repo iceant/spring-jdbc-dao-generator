@@ -1,0 +1,39 @@
+<div class="card m-2">
+    <div class="card-header">
+        @rocker.$.msg("text.project.create_dao")
+    </div>
+    <div class="card-body">
+        <div class="form-group">
+            <label for="repositoryBeanPackage{{wid}}">Repository Bean Package</label>
+            <input type="text" class="form-control form-control-sm" id="repositoryBeanPackage{{wid}}" value="{{repositoryBeanPackage}}">
+        </div>
+        <div class="form-group">
+            <label for="daoBeanPackage{{wid}}">DAO Bean Package</label>
+            <input type="text" class="form-control form-control-sm" id="daoBeanPackage{{wid}}" value="{{daoBeanPackage}}">
+        </div>
+        <div class="form-group">
+            <label for="tableBeanPackage{{wid}}">Table Bean Package</label>
+            <input type="text" class="form-control form-control-sm" id="tableBeanPackage{{wid}}" value="{{tableBeanPackage}}">
+        </div>
+        <div class="form-group">
+            <label for="jdbcUrl{{wid}}">JDBC URL</label>
+            <input type="text" class="form-control form-control-sm" id="jdbcUrl{{wid}}" value="{{jdbcUrl}}">
+        </div>
+        <div class="form-group">
+            <label for="jdbcUsername{{wid}}">JDBC Username</label>
+            <input type="text" class="form-control form-control-sm" id="jdbcUsername{{wid}}" value="{{jdbcUsername}}">
+        </div>
+        <div class="form-group">
+            <label for="jdbcPassword{{wid}}">JDBC Password</label>
+            <input type="text" class="form-control form-control-sm" id="jdbcPassword{{wid}}" value="{{jdbcPassword}}">
+        </div>
+        <div class="form-group">
+            <label for="driverClassName{{wid}}">Driver Class Name</label>
+            <input type="text" class="form-control form-control-sm" id="driverClassName{{wid}}" value="{{driverClassName}}">
+        </div>
+        <div class="input-group mb-2">
+            <input type="text" class="form-control form-control-sm" id="folder{{wid}}" placeholder='@rocker.$.msg("text.project.path")' value="{{folder}}">
+        </div>
+        <button class="btn btn-sm btn-primary btn-block" id="btnSubmit{{wid}}">@rocker.$.msg("text.submit")</button>
+    </div>
+</div>

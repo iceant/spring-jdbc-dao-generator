@@ -1,0 +1,15 @@
+<div class="card m-1">
+    <div class="card-header">
+        <span class="fa fa-product-hunt"></span> @rocker.$.msg("text.projects")
+        <button class="btn btn-sm btn-primary" id="btnCreate{{wid}}"><span class="fa fa-plus"></span></button>
+    </div>
+    <div class="card-body">
+        <ul class="list-group">
+            {{#result}}
+            <li class="list-group-item m-0 p-2">
+                <a href="javascript:void(0)" class="btn btn-link btn-block text-left" data-id="{{id}}" id="btnItem{{id}}"><span class="fa fa-cloud ml-1"></span> {{name}}</a>
+            </li>
+            {{/result}}
+        </ul>
+    </div>
+</div>

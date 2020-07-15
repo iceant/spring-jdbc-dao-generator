@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="_csrf" content='@rocker.$.csrf()'/>
+    <meta name="_csrf_header" content='@rocker.$.csrfTokenHeaderName()'/>
+    <link rel="icon" type="image/x-icon" href='@rocker.$.path("/static/favicon.ico")'>
+    <link rel="stylesheet" href='@rocker.$.path("/static/bootstrap-4.5.0-dist/css/bootstrap.min.css")'>
+    <link rel="stylesheet" href='@rocker.$.path("/static/jquery-confirm/3.3.4/jquery-confirm.min.css")'>
+</head>
+<body>
+<div id="layout-left"></div>
+<div id="layout-split"></div>
+<div id="layout-right"></div>
+<script src='@rocker.$.path("/static/jquery-3.4.1/jquery-3.4.1.min.js")'></script>
+<script src='@rocker.$.path("/static/popper.js/2.4.4/popper.min.js")'></script>
+<script src='@rocker.$.path("/static/bootstrap-4.5.0-dist/js/bootstrap.min.js")'></script>
+<script src='@rocker.$.path("/static/jquery-confirm/3.3.4/jquery-confirm.min.js")'></script>
+<!--<script src='@rocker.$.path("/static/app/js/app.base.js")'></script>-->
+<!--<script src='@rocker.$.path("/static/app/js/app.event.js")'></script>-->
+<script src='@rocker.$.path("/static/app/js/app.polyfill.js")'></script>
+<script src='@rocker.$.path("/dynamic/app.service.js")'></script>
+
+<script>
+
+    $.confirm({
+        ok:function(){
+            console.log('ok');
+        },
+        no:function(){
+            console.log('no');
+        }
+    });
+
+
+</script>
+</body>
+</html>

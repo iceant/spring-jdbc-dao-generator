@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>@rocker.$.msg("text.home")</title>
+    @rocker.$.template("layout/head.html")
+</head>
+<body>
+@rocker.$.template("layout/left_right_layout.html")
+@rocker.$.template("layout/script.html")
+<script src='@rocker.$.path("/static/app/js/left_right_layout.js")'></script>
+<script src='@rocker.$.path("/dynamic/app.main.js")'></script>
+</body>
+</html>
