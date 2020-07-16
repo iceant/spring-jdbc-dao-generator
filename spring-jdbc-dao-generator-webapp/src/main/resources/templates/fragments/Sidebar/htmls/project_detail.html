@@ -1,6 +1,6 @@
 <div class="card m-2">
     <div class="card-header">
-        @rocker.$.msg("text.project.create_dao")
+        <strong>{{name}}</strong> - @rocker.$.msg("text.project.create_dao")
     </div>
     <div class="card-body">
         <div class="form-group">
@@ -31,7 +31,8 @@
             <label for="driverClassName{{wid}}">Driver Class Name</label>
             <input type="text" class="form-control form-control-sm" id="driverClassName{{wid}}" value="{{driverClassName}}">
         </div>
-        <div class="input-group mb-2">
+        <div class="form-group mb-2">
+            <label for="folder{{wid}}">Generate Code To Path</label>
             <input type="text" class="form-control form-control-sm" id="folder{{wid}}" placeholder='@rocker.$.msg("text.project.path")' value="{{folder}}">
         </div>
         <button class="btn btn-sm btn-primary btn-block" id="btnSubmit{{wid}}">@rocker.$.msg("text.submit")</button>
