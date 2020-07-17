@@ -26,6 +26,7 @@ public class ProjectDAO {
             project.setDaoBeanPackage(resultSet.getString("daoBeanPackage"));
             project.setRepositoryBeanPackage(resultSet.getString("repositoryBeanPackage"));
             project.setTableBeanPackage(resultSet.getString("tableBeanPackage"));
+            project.setCacheConfigurationBeanPackage(resultSet.getString("cacheConfigurationBeanPackage"));
             project.setJdbcUrl(resultSet.getString("jdbcUrl"));
             project.setDriverClassName(resultSet.getString("driverClassName"));
             project.setJdbcUsername(resultSet.getString("jdbcUsername"));
@@ -53,12 +54,13 @@ public class ProjectDAO {
     }
 
     public Project update(Project project){
-        int ret = jdbcTemplate.update("UPDATE project set name=?, folder=?, daoBeanPackage=?, repositoryBeanPackage=?, tableBeanPackage=?, jdbcUrl=?, jdbcUsername=?, jdbcPassword=?, driverClassName=?  WHERE id=?",
+        int ret = jdbcTemplate.update("UPDATE project set name=?, folder=?, daoBeanPackage=?, repositoryBeanPackage=?, tableBeanPackage=?, cacheConfigurationBeanPackage=?, jdbcUrl=?, jdbcUsername=?, jdbcPassword=?, driverClassName=?  WHERE id=?",
                 project.getName(),
                 project.getFolder(),
                 project.getDaoBeanPackage(),
                 project.getRepositoryBeanPackage(),
                 project.getTableBeanPackage(),
+                project.getCacheConfigurationBeanPackage(),
                 project.getJdbcUrl(),
                 project.getJdbcUsername(),
                 project.getJdbcPassword(),

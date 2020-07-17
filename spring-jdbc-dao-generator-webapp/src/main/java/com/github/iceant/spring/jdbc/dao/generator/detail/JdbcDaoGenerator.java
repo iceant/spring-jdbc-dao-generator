@@ -1,5 +1,6 @@
 package com.github.iceant.spring.jdbc.dao.generator.detail;
 
+import com.github.iceant.spring.jdbc.dao.generator.detail.generators.CacheConfigurationGenerator;
 import com.github.iceant.spring.jdbc.dao.generator.detail.generators.DaoBeanGenerator;
 import com.github.iceant.spring.jdbc.dao.generator.detail.generators.RepositoryBeanGenerator;
 import com.github.iceant.spring.jdbc.dao.generator.detail.generators.TableBeanGenerator;
@@ -21,10 +22,14 @@ public class JdbcDaoGenerator {
         SimpleDataSource dataSource = new SimpleDataSource(properties);
 
         List<String> files = new ArrayList<>();
+        List<TableMeta> tableMetaList = new ArrayList<>();
 
         List<String> tableNames = GeneratorUtil.getTableNames(dataSource);
         for (String tableName : tableNames) {
             TableMeta tableMeta = MetaUtil.getTableMeta(dataSource, tableName);
+
+            tableMetaList.add(tableMeta);
+
             JavaBean javaBean = TableBeanGenerator.toJavaBean(tableMeta, properties);
             File tableBean = JavaBeanUtil.saveToPath(javaBean, new File(targetPath), true);
             files.add(tableBean.getAbsolutePath());
@@ -37,6 +42,10 @@ public class JdbcDaoGenerator {
             File daoBeanFile = JavaBeanUtil.saveToPath(daoBean, new File(targetPath), false);
             files.add(daoBeanFile.getAbsolutePath());
         }
+        // cache configuration
+        JavaBean cacheConfiguration = CacheConfigurationGenerator.toJavaBean(tableMetaList, properties);
+        File cachConfigurationFile = JavaBeanUtil.saveToPath(cacheConfiguration, new File(targetPath), true);
+        files.add(cachConfigurationFile.getAbsolutePath());
         return files;
     }
 }

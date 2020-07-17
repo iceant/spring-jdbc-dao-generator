@@ -59,6 +59,7 @@ public class ProjectApiController {
             String repositoryBeanPackage = SpringUtil.paramString("repositoryBeanPackage");
             String daoBeanPackage = SpringUtil.paramString("daoBeanPackage");
             String tableBeanPackage = SpringUtil.paramString("tableBeanPackage");
+            String cacheConfigurationBeanPackage = SpringUtil.paramString("cacheConfigurationBeanPackage");
             String jdbcUrl = SpringUtil.paramString("jdbcUrl");
             String jdbcUsername = SpringUtil.paramString("jdbcUsername");
             String jdbcPassword = SpringUtil.paramString("jdbcPassword");
@@ -70,6 +71,7 @@ public class ProjectApiController {
             project.setRepositoryBeanPackage(repositoryBeanPackage);
             project.setDaoBeanPackage(daoBeanPackage);
             project.setTableBeanPackage(tableBeanPackage);
+            project.setCacheConfigurationBeanPackage(cacheConfigurationBeanPackage);
             project.setJdbcUrl(jdbcUrl);
             project.setDriverClassName(driverClassName);
             project.setJdbcUsername(jdbcUsername);
@@ -81,6 +83,7 @@ public class ProjectApiController {
             properties.setTableBeanPackage(tableBeanPackage);
             properties.setDaoBeanPackage(daoBeanPackage);
             properties.setRepositoryBeanPackage(repositoryBeanPackage);
+            properties.setCacheConfigurationBeanPackage(cacheConfigurationBeanPackage);
             properties.setOutputDirectory(project.getFolder());
             properties.setJdbcUrl(jdbcUrl);
             properties.setJdbcUsername(jdbcUsername);

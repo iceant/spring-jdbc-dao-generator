@@ -46,6 +46,13 @@
                         return false;
                     }
 
+                    let $cacheConfigurationBeanPackage = $('#cacheConfigurationBeanPackage'+_id);
+                    let cacheConfigurationBeanPackage = $cacheConfigurationBeanPackage.val();
+                    if(!cacheConfigurationBeanPackage){
+                        $cacheConfigurationBeanPackage.focus();
+                        return false;
+                    }
+
                     let $jdbcUrl = $('#jdbcUrl'+_id);
                     let jdbcUrl = $jdbcUrl.val();
                     if(!jdbcUrl){
@@ -86,6 +93,7 @@
                         repositoryBeanPackage:repositoryBeanPackage,
                         daoBeanPackage:daoBeanPackage,
                         tableBeanPackage:tableBeanPackage,
+                        cacheConfigurationBeanPackage:cacheConfigurationBeanPackage,
                         jdbcUrl:jdbcUrl,
                         jdbcUsername:jdbcUsername,
                         jdbcPassword:jdbcPassword,

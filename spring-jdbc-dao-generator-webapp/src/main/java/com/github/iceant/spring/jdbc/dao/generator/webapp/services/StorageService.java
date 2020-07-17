@@ -42,6 +42,7 @@ public class StorageService {
                     "repositoryBeanPackage text, " +
                     "daoBeanPackage text, " +
                     "tableBeanPackage text, " +
+                    "cacheConfigurationBeanPackage text, " +
                     "jdbcUrl text, " +
                     "driverClassName text)");
         }

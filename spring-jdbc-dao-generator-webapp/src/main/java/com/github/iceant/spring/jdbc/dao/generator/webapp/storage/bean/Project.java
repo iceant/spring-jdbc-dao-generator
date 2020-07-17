@@ -7,10 +7,19 @@ public class Project {
     private String repositoryBeanPackage;
     private String daoBeanPackage;
     private String tableBeanPackage;
+    private String cacheConfigurationBeanPackage;
     private String jdbcUrl;
     private String jdbcUsername;
     private String jdbcPassword;
     private String driverClassName;
+
+    public String getCacheConfigurationBeanPackage() {
+        return cacheConfigurationBeanPackage;
+    }
+
+    public void setCacheConfigurationBeanPackage(String cacheConfigurationBeanPackage) {
+        this.cacheConfigurationBeanPackage = cacheConfigurationBeanPackage;
+    }
 
     public String getJdbcUsername() {
         return jdbcUsername;
