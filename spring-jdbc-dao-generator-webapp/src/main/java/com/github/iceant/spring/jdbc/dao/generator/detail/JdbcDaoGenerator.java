@@ -42,10 +42,13 @@ public class JdbcDaoGenerator {
             File daoBeanFile = JavaBeanUtil.saveToPath(daoBean, new File(targetPath), false);
             files.add(daoBeanFile.getAbsolutePath());
         }
-        // cache configuration
-        JavaBean cacheConfiguration = CacheConfigurationGenerator.toJavaBean(tableMetaList, properties);
-        File cachConfigurationFile = JavaBeanUtil.saveToPath(cacheConfiguration, new File(targetPath), true);
-        files.add(cachConfigurationFile.getAbsolutePath());
+        String cacheConfigurationBeanPackage = properties.getCacheConfigurationBeanPackage();
+        if(cacheConfigurationBeanPackage!=null && cacheConfigurationBeanPackage.trim().length()>0) {
+            // cache configuration
+            JavaBean cacheConfiguration = CacheConfigurationGenerator.toJavaBean(tableMetaList, properties);
+            File cachConfigurationFile = JavaBeanUtil.saveToPath(cacheConfiguration, new File(targetPath), true);
+            files.add(cachConfigurationFile.getAbsolutePath());
+        }
         return files;
     }
 }

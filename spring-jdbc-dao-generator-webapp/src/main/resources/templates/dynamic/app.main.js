@@ -2,19 +2,25 @@
     $layoutLeft = $('#layout-left');
     $layoutRight = $('#layout-right');
 
-    var Fragment = function(content){
-        var self = this;
-        self.__proto__.content = content.content;
+    let Fragment = function(content){
+        let self = this;
+        self.content = content.content;
+        self.cc = []; /*code cache*/
     };
     Fragment.prototype.run=function(){
-        var self = this;
-        var args = arguments;
-        var n = Array.prototype.shift.apply(args, args);
-        var c = self.content;
+        let self = this;
+        let args = arguments;
+        let n = Array.prototype.shift.apply(args, args);
+        let c = self.content;
         if(!c) return;
-        var s = c[n];
+        let s = c[n];
         if(s) {
-            var f = eval(s);
+            let f = self.cc[s];
+            console.log(f);
+            if(!f){
+                f = eval(s);
+                self.cc[s] = f;
+            }
             if($app.isFunction(f)) {
                 return f.apply(this, args);
             }
@@ -25,12 +31,12 @@
     }
 
     $.when(
-        $.get('@rocker.$.path("/fragments/Sidebar")')
+        $.get('@rocker.$.path("/fragments/Widgets")')
     ).then(function(
-        SidebarContent
+        Widgets
     ){
-       var Sidebar = new Fragment(SidebarContent);
-       var $sidebar = Sidebar.run('main.js');
+       let $fragment = new Fragment(Widgets);
+       let $sidebar = $fragment.run('main.js');
        $sidebar.display({el:'#layout-left'});
     });
 

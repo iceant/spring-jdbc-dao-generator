@@ -48,10 +48,10 @@
 
                     let $cacheConfigurationBeanPackage = $('#cacheConfigurationBeanPackage'+_id);
                     let cacheConfigurationBeanPackage = $cacheConfigurationBeanPackage.val();
-                    if(!cacheConfigurationBeanPackage){
-                        $cacheConfigurationBeanPackage.focus();
-                        return false;
-                    }
+                    // if(!cacheConfigurationBeanPackage){
+                    //     $cacheConfigurationBeanPackage.focus();
+                    //     return false;
+                    // }
 
                     let $jdbcUrl = $('#jdbcUrl'+_id);
                     let jdbcUrl = $jdbcUrl.val();
