@@ -11,6 +11,10 @@ public class {{className}} implements Serializable{
     {{/columns}}
 
     {{#columns}}
+    public static final String PROP_{{tableColumnNameUpperCase}}="{{javaFiledName}}";
+    {{/columns}}
+
+    {{#columns}}
     private {{javaFieldType}} {{javaFiledName}};
     {{/columns}}
 

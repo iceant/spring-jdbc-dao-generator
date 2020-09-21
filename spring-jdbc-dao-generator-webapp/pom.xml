@@ -54,6 +54,13 @@
         </dependency>
 
         <dependency>
+            <groupId>com.oracle.database.jdbc</groupId>
+            <artifactId>ojdbc10</artifactId>
+            <version>19.7.0.0</version>
+        </dependency>
+
+
+        <dependency>
             <groupId>com.github.iceant</groupId>
             <artifactId>xrocker-spring-boot-starter</artifactId>
             <version>-497d461cc7-1</version>

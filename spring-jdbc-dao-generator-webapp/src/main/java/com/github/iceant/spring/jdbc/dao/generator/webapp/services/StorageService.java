@@ -44,6 +44,8 @@ public class StorageService {
                     "tableBeanPackage text, " +
                     "cacheConfigurationBeanPackage text, " +
                     "jdbcUrl text, " +
+                    "jdbcUsername text, " +
+                    "jdbcPassword text, " +
                     "driverClassName text)");
         }
     }

@@ -46,9 +46,9 @@ public class FragmentController {
         String templateDirectory = environment.getProperty("fragment.spring.rocker.template-directory", environment.getProperty("spring.rocker.template-directory"));
         String outputDirectory = environment.getProperty("fragment.spring.rocker.output-directory", environment.getProperty("spring.rocker.output-directory"));
         String classDirectory = environment.getProperty("fragment.spring.rocker.class-directory", environment.getProperty("spring.rocker.class-directory"));
-        Boolean reloading = environment.getProperty("fragment.spring.rocker.reloading", Boolean.class, Boolean.TRUE);
-        Boolean optimize = environment.getProperty("fragment.spring.rocker.optimize", Boolean.class, Boolean.TRUE);
-        Boolean discardLogicWhitespace = environment.getProperty("fragment.spring.rocker.discard-logic-whitespace", Boolean.class, Boolean.TRUE);
+        Boolean reloading = environment.getProperty("fragment.spring.rocker.reloading", Boolean.class, environment.getProperty("spring.rocker.reloading", Boolean.class, Boolean.FALSE));
+        Boolean optimize = environment.getProperty("fragment.spring.rocker.optimize", Boolean.class, environment.getProperty("spring.rocker.optimize", Boolean.class, Boolean.FALSE));
+        Boolean discardLogicWhitespace = environment.getProperty("fragment.spring.rocker.discard-logic-whitespace", Boolean.class, environment.getProperty("spring.rocker.discard-logic-whitespace", Boolean.class, Boolean.TRUE));
         String postProcessing = environment.getProperty("fragment.spring.rocker.postProcessing", environment.getProperty("spring.rocker.postProcessing"));
 
         properties.setTemplateDirectory(templateDirectory);

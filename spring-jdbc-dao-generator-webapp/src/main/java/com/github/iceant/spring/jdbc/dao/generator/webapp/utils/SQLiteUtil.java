@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 public class SQLiteUtil {
     public static String getPath(){
         File appHome =  AppUtil.getAppHome(SpringJdbcDaoGeneratorWebappApplication.class);
-        return Paths.get(appHome.getAbsolutePath(), "jdbc-dao-generator.db").toString().toLowerCase();
+        String root = SpringUtil.getProperty("app.filevault.path", appHome.getAbsolutePath());
+        return Paths.get(root, "jdbc-dao-generator.db").toString().toLowerCase();
     }
 }
